@@ -1,4 +1,4 @@
-// Dependants -------------------------------------->
+// Dependants --------------------------------------==>
 const { v4: uuidv4 } = require('uuid');
 const https = require('https');
 const request = require('request');
