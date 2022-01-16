@@ -66,6 +66,12 @@ wss.on("connection", function(socket, req) {
     else if(meta === "leave") {
       leave(room);
     }
+ else if (meta === "broadcast"){
+        broadcast(room, message)
+    }
+    else if (meta === "keepalive"){
+        socket.send('{"meta":"keepalive"}')
+    }
     else if(! meta) {
       // send the message to all in the room
 	 let sendit = new Object();
@@ -86,4 +92,11 @@ wss.on("connection", function(socket, req) {
   });
 });
 
+
+function broadcast(room, message){
+    if(room in rooms)
+    Object.entries(rooms[room]).forEach(client => {
+     client[1].send(JSON.stringify(message))
+  }); 
+}
  
